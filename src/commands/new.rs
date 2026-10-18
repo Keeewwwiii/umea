@@ -4,15 +4,12 @@ use std::io;
 use std::path::Path;
 
 pub fn execute(name: &str) -> io::Result<()> {
-    // 1. Definiera sökvägarna
     let root_path = Path::new("examples").join(name);
     let public_path = root_path.join("public");
     let src_path = public_path.join("src");
 
-    // 2. Skapa alla mappar på en gång (använd create_dir_all så skapas även 'public' och 'src')
     fs::create_dir_all(&src_path)?;
 
-    // 3. Generera JSON-data
     let version = 1.0; 
     let umea_json = format!(
 r#"
@@ -26,7 +23,6 @@ r#"
         name, version
     );
 
-    // 4. HTML- och CSS-innehåll
     let html: &str = r#"<!doctype html>
     <html lang="en">
     <head>
